@@ -2,7 +2,7 @@
 #include <stdio.h>
 /**
  * main - prints _putchare, followed by a new line
- * return : always (0) success
+ * Return: always (0) success
  *
  */
 
