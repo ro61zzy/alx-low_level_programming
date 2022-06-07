@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include <stdio.h>
 /*
  * main - prints out putchar followed be a new line
  * return : always (0) success
@@ -7,15 +7,14 @@
  */
 
 int main(void)
+
 {
-_putchar('-');
-_putchar('p');
-_putchar('u');
-_putchar('t');
-_putchar('c');
-_putchar('h');
-_putchar('a');
-_putchar('r');
+char ch[8] = "_putchar";
+int i;
+for (i = 0; i < 8 ; i++)
+{
+_putchar(ch[i]);
+}
 _putchar('\n');
 return (0);
 }
