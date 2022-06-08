@@ -1,9 +1,9 @@
 #include "main.h"
 void positive_or_negative(int i);
 /**
- * main - entry fn
+ * main - main
  *
- * Return: always 0
+ * Return: 0
  */
 int main(void)
 {
