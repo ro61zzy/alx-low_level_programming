@@ -1,53 +1,53 @@
 #include "lists.h"
 
 /**
- * delete_dnodeint_at_index - a function that deletes the node at
- * index index of a dlistint_t linked list
- * @head: head node
- * @index:  the index of the node that should be deleted. Index starts at 0
- *
- * Return: 1 if it succeeded, -1 if it failed
+ *insert_dnodeint_at_index- insert at a given node
+ *@idx: index the given data can be inserted
+ *@h: first node
+ *@n:new data can be inserted
+ *Return: null the file can be failed
  */
 
-int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *curr_node = *head;
-	size_t size = 0;
+	dlistint_t *new;
+	dlistint_t *current;
 
-	if (!*head)
+	unsigned int i;
+
+	if (h == NULL)
+		return (NULL);
+
+	new = malloc(sizeof(dlistint_t));
+
+	if (new == NULL)
+		return (NULL);
+
+	new->n = n;
+	new->next = NULL;
+	new->prev = NULL;
+
+	if (idx == 0)
+		return (add_dnodeint(h, n));
+
+	current = (*h);
+	for (i = 0; i < idx && current; i++)
 	{
-		return (-1);
-	}
-	while (curr_node)
-	{
-		size++;
-		curr_node = curr_node->next;
-	}
-	if (size < index + 1)
-	{
-		return (-1);
-	}
-	curr_node = *head;
-	if (!index)
-	{
-		*head = curr_node->next;
-		if (curr_node->next)
+		if (i == idx - 1)
 		{
-			curr_node->next->prev = NULL;
+			if (current->next == NULL)
+				return (add_dnodeint_end(h, n));
+
+			new->prev = current;
+			new->next = current->next;
+			current->next->prev = new;
+			current->next = new;
+
+			return (new);
 		}
-		curr_node->next = NULL;
-		free(curr_node);
-		return (1);
+		else
+			current = current->next;
 	}
-	while (index--)
-	{
-		curr_node = curr_node->next;
-	}
-	curr_node->prev->next = curr_node->next;
-	if (curr_node->next)
-	{
-		curr_node->next->prev = curr_node->prev;
-	}
-	free(curr_node);
-	return (1);
+
+	return (NULL);
 }
